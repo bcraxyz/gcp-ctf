@@ -1,0 +1,5 @@
+project_id       = "your-project-id"
+project_name     = "your-project-name"
+region           = "your-region"
+org_id           = "your-org-id"
+billing_account  = "your-billing-account"

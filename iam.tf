@@ -24,8 +24,20 @@ resource "google_storage_bucket_iam_member" "gcs_sa_bucket_admin" {
   member = "serviceAccount:${google_service_account.gcs_sa.email}"
 }
 
-resource "google_project_iam_member" "iap_access_group" {
+resource "google_project_iam_member" "ctf_iap_tunnel_access" {
   project = var.project_a
   role    = "roles/iap.tunnelResourceAccessor"
+  member  = "group:${var.ctf_users_group}"
+}
+
+resource "google_project_iam_member" "ctf_compute_viewer" {
+  project = var.project_a
+  role    = "roles/compute.instanceViewer"
+  member  = "group:${var.ctf_users_group}"
+}
+
+resource "google_project_iam_member" "ctf_os_login" {
+  project = var.project_a
+  role    = "roles/compute.osLogin"
   member  = "group:${var.ctf_users_group}"
 }

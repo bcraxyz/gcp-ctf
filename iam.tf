@@ -24,16 +24,10 @@ resource "google_service_account_iam_member" "vm_sa_token_creator_for_gcs_sa" {
   member  = "serviceAccount:${google_service_account.vm_sa.email}"
 }
 
-resource "google_project_iam_member" "gcs_sa_storage_viewer" {
+resource "google_project_iam_member" "gcs_sa_storage_admin" {
   project = google_project.project_b.project_id
-  role    = "roles/storage.viewer"
+  role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.gcs_sa.email}"
-}
-
-resource "google_storage_bucket_iam_member" "gcs_sa_bucket_admin" {
-  bucket = google_storage_bucket.sensitive_data.name
-  role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${google_service_account.gcs_sa.email}"
 }
 
 resource "google_project_iam_member" "ctf_iap_tunnel_access" {

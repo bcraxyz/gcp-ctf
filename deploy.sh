@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === Configurable vars ===
-TF_DIR=~/terraform_c01
+TF_DIR=~/gcp-ctf
 TFVARS_FILE=$TF_DIR/terraform.tfvars
 
 # === Input values ===

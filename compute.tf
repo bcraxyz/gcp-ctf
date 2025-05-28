@@ -10,6 +10,8 @@ resource "google_compute_subnetwork" "subnet" {
   region        = var.region
   network       = google_compute_network.network.id
   project       = google_project.project_a.project_id
+
+  private_ip_google_access = true
 }
 
 resource "google_compute_firewall" "allow_ssh_from_iap" {

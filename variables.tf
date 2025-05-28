@@ -1,3 +1,11 @@
+variable "org_id" {
+  type = string
+}
+
+variable "billing_account_id" {
+  type = string
+}
+
 variable "project_a" { 
   default = "c01-proj-a" 
 }

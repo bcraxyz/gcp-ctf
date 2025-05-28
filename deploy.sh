@@ -8,8 +8,10 @@ TFVARS_FILE=$TF_DIR/terraform.tfvars
 cat > $TFVARS_FILE <<EOF
 project_a = "c01-proj-a"
 project_b = "c01-proj-b"
-region    = "asia-southeast1"
-zone      = "asia-southeast1-a"
+region = "asia-southeast1"
+zone  = "asia-southeast1-a"
+org_id = "123456789012"
+billing_account_id = "ABCDEF-123456-7890AB"
 ctf_users_group = "ctf-users@yourdomain.com"
 EOF
 

@@ -6,8 +6,6 @@ TFVARS_FILE=$TF_DIR/terraform.tfvars
 
 # === Input values ===
 cat > $TFVARS_FILE <<EOF
-project_a = "c01-proj-a"
-project_b = "c01-proj-b"
 region = "asia-southeast1"
 zone  = "asia-southeast1-a"
 org_id = "123456789012"

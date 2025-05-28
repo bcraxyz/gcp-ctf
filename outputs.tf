@@ -10,10 +10,6 @@ output "project_b_id" {
   value = google_project.project_b.project_id
 }
 
-output "vm_ip" {
-  value = google_compute_instance.vm.network_interface[0].access_config[0].nat_ip
-}
-
 output "vm_service_account" {
   value = google_service_account.vm_sa.email
 }

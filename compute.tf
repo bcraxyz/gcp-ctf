@@ -1,7 +1,7 @@
 resource "google_compute_network" "network" {
   name                    = "c01-net"
   auto_create_subnetworks = false
-  project                 = var.project_a
+  project                 = google_project.project_a.project_id
 }
 
 resource "google_compute_subnetwork" "subnet" {
@@ -9,13 +9,13 @@ resource "google_compute_subnetwork" "subnet" {
   ip_cidr_range = "10.0.0.0/24"
   region        = var.region
   network       = google_compute_network.network.name
-  project       = var.project_a
+  project       = google_project.project_a.project_id
 }
 
 resource "google_compute_firewall" "allow_ssh_from_iap" {
   name    = "allow-ssh-from-iap"
   network = google_compute_network.network.name
-  project = var.project_a
+  project = google_project.project_a.project_id
 
   allow {
     protocol = "tcp"
@@ -30,7 +30,7 @@ resource "google_compute_instance" "vm" {
   name         = "c01-vm"
   machine_type = "e2-small"
   zone         = var.zone
-  project      = var.project_a
+  project      = google_project.project_a.project_id
 
   tags = ["ssh"]
 

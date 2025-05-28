@@ -1,0 +1,62 @@
+resource "google_compute_network" "network" {
+  name                    = "c01-net"
+  auto_create_subnetworks = false
+  project                 = var.project_a
+}
+
+resource "google_compute_subnetwork" "subnet" {
+  name          = "c01-subnet"
+  ip_cidr_range = "10.0.0.0/24"
+  region        = var.region
+  network       = google_compute_network.network.name
+  project       = var.project_a
+}
+
+resource "google_compute_firewall" "allow_ssh_from_iap" {
+  name    = "allow-ssh-from-iap"
+  network = google_compute_network.network.name
+  project = var.project_a
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  source_ranges = ["35.235.240.0/20"]
+  target_tags   = ["ssh"]
+}
+
+resource "google_compute_instance" "vm" {
+  name         = "c01-vm"
+  machine_type = "e2-small"
+  zone         = var.zone
+  project      = var.project_a
+
+  tags = ["ssh"]
+
+  boot_disk {
+    initialize_params {
+      image = "projects/debian-cloud/global/images/family/debian-11"
+    }
+  }
+
+  network_interface {
+    network    = google_compute_network.network.name
+    subnetwork = google_compute_subnetwork.subnet.name
+    access_config {}
+  }
+
+  service_account {
+    email  = google_service_account.vm_sa.email
+    scopes = ["cloud-platform"]
+  }
+
+  metadata = {
+    enable-oslogin = "TRUE"
+  }
+
+  metadata_startup_script = <<-EOT
+    #!/bin/bash
+    echo "CTF VM ready"
+  EOT
+}

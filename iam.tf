@@ -12,7 +12,7 @@ resource "google_service_account" "gcs_sa" {
   project      = google_project.project_b.project_id
 }
 
-resource "google_project_iam_member" "vm_sa_impersonate_gcs_sa" {
+resource "google_service_account_iam_member" "vm_sa_impersonate_gcs_sa" {
   service_account_id = google_service_account.gcs_sa.name
   role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${google_service_account.vm_sa.email}"

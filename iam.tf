@@ -18,6 +18,12 @@ resource "google_service_account_iam_member" "vm_sa_impersonate_gcs_sa" {
   member  = "serviceAccount:${google_service_account.vm_sa.email}"
 }
 
+resource "google_service_account_iam_member" "vm_sa_token_creator_for_gcs_sa" {
+  service_account_id = google_service_account.gcs_sa.name
+  role    = "roles/iam.serviceAccountTokenCreator"
+  member  = "serviceAccount:${google_service_account.vm_sa.email}"
+}
+
 resource "google_storage_bucket_iam_member" "gcs_sa_bucket_admin" {
   bucket = google_storage_bucket.sensitive_data.name
   role   = "roles/storage.objectAdmin"

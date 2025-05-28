@@ -12,6 +12,12 @@ resource "google_service_account" "gcs_sa" {
   project      = google_project.project_b.project_id
 }
 
+resource "google_service_account_iam_member" "ctf_users_can_use_vm_sa" {
+  service_account_id = google_service_account.vm_sa.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "group:${var.ctf_users_group}"
+}
+
 resource "google_service_account_iam_member" "vm_sa_impersonate_gcs_sa" {
   service_account_id = google_service_account.gcs_sa.name
   role    = "roles/iam.serviceAccountUser"

@@ -8,6 +8,10 @@ resource "google_project" "project_a" {
   project_id      = "ctf-c01-proj-a"
   folder_id       = google_folder.ctf_folder.name
   billing_account = var.billing_account_id
+
+  lifecycle {
+    prevent_destroy = false
+  }
 }
 
 resource "google_project" "project_b" {
@@ -15,4 +19,8 @@ resource "google_project" "project_b" {
   project_id      = "ctf-c01-proj-b"
   folder_id       = google_folder.ctf_folder.name
   billing_account = var.billing_account_id
+
+  lifecycle {
+    prevent_destroy = false
+  }
 }

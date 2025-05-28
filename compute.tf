@@ -6,9 +6,9 @@ resource "google_compute_network" "network" {
 
 resource "google_compute_subnetwork" "subnet" {
   name          = "c01-subnet"
-  ip_cidr_range = "10.0.0.0/24"
+  ip_cidr_range = "10.140.0.0/24"
   region        = var.region
-  network       = google_compute_network.network.name
+  network       = google_compute_network.network.id
   project       = google_project.project_a.project_id
 }
 
@@ -41,9 +41,14 @@ resource "google_compute_instance" "vm" {
   }
 
   network_interface {
-    network    = google_compute_network.network.name
-    subnetwork = google_compute_subnetwork.subnet.name
-    access_config {}
+    network    = google_compute_network.network.id
+    subnetwork = google_compute_subnetwork.subnet.id
+  }
+
+  shielded_instance_config {
+    enable_secure_boot          = true
+    enable_vtpm                 = true
+    enable_integrity_monitoring = true
   }
 
   service_account {

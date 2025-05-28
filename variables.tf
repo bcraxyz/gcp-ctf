@@ -6,14 +6,6 @@ variable "billing_account_id" {
   type = string
 }
 
-variable "project_a" { 
-  default = "c01-proj-a" 
-}
-
-variable "project_b" { 
-  default = "c01-proj-b" 
-}
-
 variable "region" { 
   default = "asia-southeast1" 
 }

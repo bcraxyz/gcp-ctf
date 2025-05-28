@@ -32,7 +32,7 @@ resource "google_project_iam_member" "ctf_iap_tunnel_access" {
 
 resource "google_project_iam_member" "ctf_compute_viewer" {
   project = google_project.project_a.project_id
-  role    = "roles/compute.instanceViewer"
+  role    = "roles/compute.viewer"
   member  = "group:${var.ctf_users_group}"
 }
 

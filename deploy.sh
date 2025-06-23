@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Set working dir to this script location
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR" || exit 1
 
@@ -8,10 +7,10 @@ cd "$SCRIPT_DIR" || exit 1
 cd common || exit 1
 terraform init
 terraform apply -auto-approve -var-file=../terraform.tfvars
-FOLDER_ID=$(terraform output -raw ctf_folder_name)
+FOLDER_ID=$(terraform output -raw ctf_folder_id)
 cd ..
 
-# Loop over challenges
+# Deploy challenge(s)
 for CHALLENGE in challenges/challenge01; do
   echo "[+] Deploying $CHALLENGE..."
   cd $CHALLENGE || exit 1

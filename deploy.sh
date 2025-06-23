@@ -1,31 +1,25 @@
 #!/bin/bash
 
-# === Configurable vars ===
-TF_DIR=~/gcp-ctf
-TFVARS_FILE=$TF_DIR/terraform.tfvars
+# Set working dir to this script location
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR" || exit 1
 
-# === Input values ===
-cat > $TFVARS_FILE <<EOF
-region = "asia-southeast1"
-zone  = "asia-southeast1-a"
-org_id = "123456789012"
-billing_account_id = "ABCDEF-123456-7890AB"
-ctf_users_group = "ctf-users@yourdomain.com"
-EOF
-
-# === Initialize ===
-cd $TF_DIR || exit 1
-echo "[+] Initializing Terraform..."
+# Common init
+cd common || exit 1
 terraform init
+terraform apply -auto-approve -var-file=../terraform.tfvars
+FOLDER_ID=$(terraform output -raw ctf_folder_name)
+cd ..
 
-# === Validate ===
-echo "[+] Validating config..."
-terraform validate
+# Loop over challenges
+for CHALLENGE in challenges/challenge01; do
+  echo "[+] Deploying $CHALLENGE..."
+  cd $CHALLENGE || exit 1
 
-# === Plan ===
-echo "[+] Running plan..."
-terraform plan -var-file=terraform.tfvars
+  terraform init
+  terraform apply -auto-approve \
+    -var-file=../../terraform.tfvars \
+    -var="ctf_folder_id=$FOLDER_ID"
 
-# === Apply ===
-echo "[+] Applying configuration..."
-terraform apply -auto-approve -var-file=terraform.tfvars
+  cd - > /dev/null
+done

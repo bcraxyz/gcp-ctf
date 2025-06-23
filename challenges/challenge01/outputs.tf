@@ -1,7 +1,3 @@
-output "ctf_folder_name" {
-  value = google_folder.ctf_folder.name
-}
-
 output "project_a_id" {
   value = google_project.project_a.project_id
 }

@@ -9,5 +9,5 @@ resource "google_storage_bucket" "sensitive_data" {
 resource "google_storage_bucket_object" "sensitive_file" {
   name   = "sensitive-data.txt"
   bucket = google_storage_bucket.sensitive_data.name
-  source = "sensitive-data.txt"
+  source = "${path.module}/sensitive-data.txt"
 }

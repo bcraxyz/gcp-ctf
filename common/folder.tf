@@ -3,6 +3,6 @@ resource "google_folder" "ctf_folder" {
   parent       = "organizations/${var.org_id}"
 }
 
-output "ctf_folder_name" {
-  value = google_folder.ctf_folder.name
+output "ctf_folder_id" {
+  value = google_folder.ctf_folder.id
 }

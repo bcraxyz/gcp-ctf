@@ -9,14 +9,8 @@ resource "google_project_iam_custom_role" "priv_esc_role" {
   ]
 }
 
-resource "google_service_account" "gcs_sa" {
-  account_id   = "c02-gcs-sa"
-  display_name = "GCS Service Account"
-  project      = google_project.project.project_id
-}
-
-resource "google_project_iam_member" "assign_priv_esc_role" {
+resource "google_project_iam_member" "ctf_users_can_priv_esc" {
   project = google_project.project.project_id
   role    = google_project_iam_custom_role.priv_esc_role.name
-  member  = "serviceAccount:${google_service_account.gcs_sa.email}"
+  member  = "group:${var.ctf_users_group}"
 }

@@ -32,6 +32,11 @@ resource "google_project_service" "project_a_apis" {
   service = each.key
 }
 
+resource "time_sleep" "wait_for_compute_api_project_a" {
+  depends_on = [google_project_service.project_a_apis["compute.googleapis.com"]]
+  create_duration = "60s"
+}
+
 resource "google_project_service" "project_b_apis" {
   provider = google.project_b
   for_each = toset([

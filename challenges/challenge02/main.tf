@@ -3,7 +3,7 @@ resource "random_id" "suffix" {
 }
 
 resource "google_project" "project" {
-  name            = "Challenge 02 - Project"
+  name            = "Challenge02 - Project"
   project_id      = "ctf-c02-proj-${random_id.suffix.hex}"
   folder_id       = var.ctf_folder_id
   billing_account = var.billing_account_id

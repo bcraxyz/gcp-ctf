@@ -1,6 +1,10 @@
+resource "random_id" "suffix" {
+  byte_length = 2 # This will generate a 4-character hex string (2 bytes * 2 hex chars/byte)
+}
+
 resource "google_project" "project_a" {
   name            = "Challenge 01 - Project A"
-  project_id      = "ctf-c01-proj-a"
+  project_id      = "ctf-c01-proj-a-${random_id.suffix.hex}"
   folder_id       = var.ctf_folder_id
   billing_account = var.billing_account_id
 
@@ -11,7 +15,7 @@ resource "google_project" "project_a" {
 
 resource "google_project" "project_b" {
   name            = "Challenge 01 - Project B"
-  project_id      = "ctf-c01-proj-b"
+  project_id      = "ctf-c01-proj-b-${random_id.suffix.hex}"
   folder_id       = var.ctf_folder_id
   billing_account = var.billing_account_id
 

@@ -3,7 +3,7 @@ resource "google_compute_network" "network" {
   auto_create_subnetworks = false
   project                 = google_project.project_a.project_id
 
-  depends_on = [time_sleep.wait_for_compute_apis_project_a]
+  depends_on = [time_sleep.wait_for_compute_api_project_a]
 }
 
 resource "google_compute_subnetwork" "subnet" {

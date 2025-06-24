@@ -8,6 +8,8 @@ resource "google_project" "project_a" {
   folder_id       = var.ctf_folder_id
   billing_account = var.billing_account_id
 
+  skip_delete     = false
+
   lifecycle {
     prevent_destroy = false
   }
@@ -18,6 +20,8 @@ resource "google_project" "project_b" {
   project_id      = "ctf-c01-proj-b-${random_id.suffix.hex}"
   folder_id       = var.ctf_folder_id
   billing_account = var.billing_account_id
+
+  skip_delete     = false
 
   lifecycle {
     prevent_destroy = false

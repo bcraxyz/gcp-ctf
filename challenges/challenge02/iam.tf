@@ -4,7 +4,12 @@ resource "google_project_iam_custom_role" "priv_esc_role" {
   title       = "Privilege Escalation Role"
   description = "Allows project visibility and privilege escalation"
   permissions = [
+    "compute.instances.list",
     "compute.instances.get",
+    "compute.subnetworks.list",
+    "compute.subnetworks.get",
+    "compute.networks.list",
+    "compute.networks.get",
     "resourcemanager.projects.get",
     "resourcemanager.projects.setIamPolicy",
     "iam.roles.get",

@@ -8,6 +8,8 @@ resource "google_project" "project" {
   folder_id       = var.ctf_folder_id
   billing_account = var.billing_account_id
 
+  skip_delete     = false
+
   lifecycle {
     prevent_destroy = false
   }

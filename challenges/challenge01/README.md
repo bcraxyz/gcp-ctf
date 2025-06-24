@@ -14,5 +14,3 @@ Your objective is to:
 - Pivot across any available trust relationships or IAM bindings.
 - Access the sensitive Cloud Storage bucket in `Challenge 01 - Project B`.
 - Read and enumerate the contents of the confidential file stored there.
-
-> ⚠️ Do not create, delete, or modify any existing resources; work only with what's been provisioned.

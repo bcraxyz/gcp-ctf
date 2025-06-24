@@ -1,5 +1,9 @@
+resource "random_id" "suffix" {
+  byte_length = 2 # This will generate a 4-character hex string (2 bytes * 2 hex chars/byte)
+}
+
 resource "google_storage_bucket" "sensitive_data" {
-  name          = "c01-sensitive-data"
+  name          = "c01-sensitive-data-${random_id.suffix.hex}"
   location      = var.region
   project       = google_project.project_b.project_id
   force_destroy = true

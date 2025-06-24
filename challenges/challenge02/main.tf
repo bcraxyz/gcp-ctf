@@ -13,6 +13,11 @@ resource "google_project" "project" {
   }
 }
 
+resource "time_sleep" "wait_for_project_creation" {
+  depends_on = [google_project.project]
+  create_duration = "30s" # Adjust as needed, 30-60s is often sufficient
+}
+
 resource "google_project_service" "project_apis" {
   for_each = toset([
     "resourcemanager.googleapis.com",
@@ -20,6 +25,8 @@ resource "google_project_service" "project_apis" {
   ])
   project = google_project.project.project_id
   service = each.key
+  
+  depends_on = [time_sleep.wait_for_project_creation]
 }
 
 provider "google" {

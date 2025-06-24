@@ -2,8 +2,9 @@ resource "google_project_iam_custom_role" "priv_esc_role" {
   role_id     = "privEscalationRole"
   project     = google_project.project.project_id
   title       = "Privilege Escalation Role"
-  description = "Allows setIamPolicy and roles.get"
+  description = "Allows project visibility and privilege escalation"
   permissions = [
+    "resourcemanager.projects.get",
     "resourcemanager.projects.setIamPolicy",
     "iam.roles.get",
   ]

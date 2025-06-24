@@ -19,6 +19,5 @@ resource "google_project_service" "project_apis" {
 }
 
 provider "google" {
-  project = google_project.project.project_id
   region  = var.region
 }

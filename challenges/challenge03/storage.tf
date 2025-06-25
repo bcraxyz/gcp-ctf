@@ -1,7 +1,7 @@
 resource "google_storage_bucket" "sensitive_data" {
   name          = "c02-sensitive-data-${random_id.suffix.hex}"
   location      = var.region
-  project       = google_project.project_b.project_id
+  project       = google_project.project.project_id
   force_destroy = true
   uniform_bucket_level_access = true
 }

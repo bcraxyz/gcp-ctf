@@ -24,10 +24,8 @@ resource "google_access_context_manager_service_perimeter_resource" "attach_proj
   resource       = "projects/${google_project.project.number}"
 }
 
-resource "google_access_context_manager_access_policy_iam_binding" "bind_ctf_users" {
-  policy  = google_access_context_manager_access_policy.ctf_policy.name
+resource "google_access_context_manager_access_policy_iam_member" "bind_ctf_users" {
+  name    = google_access_context_manager_access_policy.ctf_policy.name
   role    = "roles/accesscontextmanager.policyReader"
-  members = [
-    "group:${var.ctf_users_group}"
-  ]
+  members = "group:${var.ctf_users_group}"
 }

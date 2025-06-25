@@ -7,13 +7,13 @@ variable "billing_account_id" {
 }
 
 variable "region" {
-  default = "asia-southeast1"
+  type = string
 }
 
 variable "zone" {
-  default = "asia-southeast1-a"
+  type = string
 }
 
 variable "ctf_users_group" {
-  default = "ctf-users@yourdomain.com"
+  type = string
 }

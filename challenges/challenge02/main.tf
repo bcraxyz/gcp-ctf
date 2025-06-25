@@ -21,6 +21,7 @@ resource "time_sleep" "wait_for_project_creation" {
 resource "google_project_service" "project_apis" {
   for_each = toset([
     "iam.googleapis.com",
+    "storage.googleapis.com",
   ])
   project = google_project.project.project_id
   service = each.key
